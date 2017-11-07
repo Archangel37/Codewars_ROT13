@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 
@@ -45,22 +46,20 @@ namespace Codewars_ROT13
 
         public string rot13(string input)
         {
-            var ch_input = new List<char>();
-            for (var i = 0; i < input.Length; i++)
-                ch_input.Add(input[i]);
+            var chInput = input.ToList();
             var result = string.Empty;
 
-            for (var n = 0; n < ch_input.Count; n++)
-                if (high1.Contains(ch_input[n]))
-                    result += high2[high1.IndexOf(ch_input[n])];
-                else if (high2.Contains(ch_input[n]))
-                    result += high1[high2.IndexOf(ch_input[n])];
-                else if (low1.Contains(ch_input[n]))
-                    result += low2[low1.IndexOf(ch_input[n])];
-                else if (low2.Contains(ch_input[n]))
-                    result += low1[low2.IndexOf(ch_input[n])];
+            foreach (char t in chInput)
+                if (high1.Contains(t))
+                    result += high2[high1.IndexOf(t)];
+                else if (high2.Contains(t))
+                    result += high1[high2.IndexOf(t)];
+                else if (low1.Contains(t))
+                    result += low2[low1.IndexOf(t)];
+                else if (low2.Contains(t))
+                    result += low1[low2.IndexOf(t)];
                 else
-                    result += ch_input[n];
+                    result += t;
             return result;
         }
 
